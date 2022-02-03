@@ -23,10 +23,10 @@ namespace CC_Intarefaces_Lesson11
             return Number1 + Number3;
         }
 
-        public double SubTwoNumbers()
-        {
-            return Number1 - Number3;
-        }
+        //public double SubTwoNumbers()
+        //{
+        //    return Number1 - Number3;
+        //}
 
         public double DivTwoNumbers()
         {

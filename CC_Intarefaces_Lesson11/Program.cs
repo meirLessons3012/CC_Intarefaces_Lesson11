@@ -6,6 +6,24 @@ namespace CC_Intarefaces_Lesson11
     {
         static void Main(string[] args)
         {
+
+            object o1 = "meir";
+            string s1 = o1 as string;
+            object o2 = 123;
+            string s2 = o2 as string;
+
+            string s3 = o1 as string;
+            if(s3 != null)
+            {
+                Console.WriteLine("string");
+            }
+            else
+            {
+                Console.WriteLine("not string");
+            }
+
+
+            #region Interfaces
             object o = "gershon";
             string s = "gershon";
             s.ToUpper();
@@ -22,17 +40,76 @@ namespace CC_Intarefaces_Lesson11
             CalcNumbers(c4);
 
             ICalculator[] calculators = new ICalculator[3];
-            ICalculator cl1 = c1;
-            ICalculator cl2 = c3;
-            ICalculator cl3 = c4;
+            calculators[0] = c1;
+            calculators[1] = c3;
+            calculators[2] = c4;
+            #endregion
+
+            #region MyRegion
+
+            IBreakable glassCup = new GlassCup();
+            IBreakable Tv = new TV();
+            IElectronicDevice tv2 = new TV();
+
+            DropOnTheFloor(glassCup);
+            DropOnTheFloor(Tv);
+            DropOnTheFloor(tv2);
+
+            //OnClickPowerOnButton(glassCup);//Error
+            //OnClickPowerOnButton(Tv);//Error
+            OnClickPowerOnButton(tv2);
+
+            Respirator respirator = new Respirator();
+            OnClickPowerOffButton(tv2);
+            OnClickPowerOffButton(respirator);
+
+            #endregion
+
+            PrintType("");//system.String
+            PrintType(13);//system.Int32
+            PrintType(new TV());//CC_Intarefaces_Lesson11.TV
+
+
+        }
+
+        static void PrintType(object o)
+        {
+            Console.WriteLine(o.GetType());
         }
 
         static void CalcNumbers(ICalculator calculator)
         {
-            calculator.AddTwoNumbers();
+            //calculator.AddTwoNumbers();
             calculator.SubTwoNumbers();
-            calculator.MultplTwoNumbers();
+            //calculator.MultplTwoNumbers();
         }
+
+        public static void DropOnTheFloor(IBreakable someBreakable)
+        {
+            someBreakable.Break();
+        }
+
+        public static void OnClickPowerOnButton(IElectronicDevice ElDevice)
+        {
+            if (DateTime.Now.Hour >= 23)
+                ElDevice.Break();
+            else
+                ElDevice.On();
+        }
+        public static void OnClickPowerOffButton(IElectronicDevice ElDevice)
+        {
+
+            if (ElDevice is IHardOffable)
+            {
+                Console.WriteLine("you can turn off respirator only after 23:00");
+                return;
+            }
+            else
+            {
+                ElDevice.Off();
+            }
+        }
+
 
     }
 }

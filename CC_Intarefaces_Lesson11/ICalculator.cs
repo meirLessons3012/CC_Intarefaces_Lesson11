@@ -8,11 +8,14 @@ namespace CC_Intarefaces_Lesson11
 {
     internal interface ICalculator
     {
-        public double Number1 { get; set; }
-        public double Number2 { get; set; }
-        public double AddTwoNumbers();
-        public double SubTwoNumbers();
-        public double MultplTwoNumbers();
-        public double DivTwoNumbers();
+        double Number1 { get; set; }
+        double Number2 { get; set; }
+        double AddTwoNumbers();
+        double SubTwoNumbers()
+        {
+            return Number1 - Number2;
+        }
+        double MultplTwoNumbers();
+        double DivTwoNumbers();
     }
 }
